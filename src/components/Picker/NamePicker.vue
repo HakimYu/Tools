@@ -12,7 +12,7 @@
       </v-col>
     </v-row>
     <div class="d-flex justify-center">
-      <v-btn align-center color="white" @click="pick()" elevation="2">抽取</v-btn>
+      <v-btn align-center size="x-large" color="white" @click="pick()" elevation="2">抽取</v-btn>
     </div>
 
     <div
@@ -46,7 +46,7 @@ export default {
       '熊宇宏': 1,
       '胡珑': 1,
       '简扬': 1,
-      '刘剑豪': 1.6,
+      '刘剑豪': 1.5,
       '张振': 1,
       '杜文强': 0.8,
       '邓思艳': 1,

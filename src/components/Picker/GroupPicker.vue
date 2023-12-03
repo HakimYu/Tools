@@ -12,7 +12,7 @@
       </v-col>
     </v-row>
     <div class="d-flex justify-center">
-      <v-btn align-center color="white" @click="pick()" elevation="2">抽取</v-btn>
+      <v-btn align-center size="x-large" color="white" @click="pick()" elevation="2">抽取</v-btn>
     </div>
 
     <div
