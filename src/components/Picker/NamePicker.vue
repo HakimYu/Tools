@@ -17,20 +17,30 @@
 
     <div
       v-html="result"
-      class="mb-3 mx-2 text-h2 rainbow-text font-weight-medium text-center"
+      class="mb-3 mx-2 text-h2 font-weight-medium text-center"
       style="white-space: pre-line"
     ></div>
+    <div
+      v-if="congratulation"
+      class="ml-10 mx-2 text-h2 font-weight-medium text-center"
+      style="white-space: pre-line"
+    >👏恭喜没有抽到杨政！👏</div>
   </div>
-</template>
+  </template>
+
+<script setup>
+import confetti from 'canvas-confetti';
+</script>
 
 <script>
 export default {
   name: "NameDrawer",
   data: () => ({
+    congratulation: false,
     amount: null,
     result: null,
     allNames: {
-      '范文浩': 2,
+      '范文浩': 1.6,
       '喻鸿杰': 0.5,
       '杨政': 0.8,
       '程欣佳': 1,
@@ -50,9 +60,9 @@ export default {
       '张振': 1,
       '杜文强': 0.8,
       '邓思艳': 1,
-      '邓必清': 2,
-      '涂承涛': 2,
-      '王羽辉': 2,
+      '邓必清': 1.6,
+      '涂承涛': 1.6,
+      '王羽辉': 1.6,
       '余奎奎': 1,
       '郭文灏': 1,
       '胡昊然': 1,
@@ -61,12 +71,12 @@ export default {
       '雷程宇': 1,
       '程雨': 1,
       '魏晶晶': 1,
-      '涂龙': 2,
+      '涂龙': 1.6,
       '杨泽用': 1,
       '肖汉': 1,
       '张扬': 1,
       '程舒': 1,
-      '陈枫': 2,
+      '陈枫': 1.6,
       '周世显': 0.8,
       '黄涛': 1,
       '王琦炜': 1,
@@ -78,6 +88,12 @@ export default {
       '孙涵': 1
     }
   }),
+  mounted() {
+    window.addEventListener('keydown', this.handleKeyDown);
+    if (localStorage.getItem('magic') === 'true') {
+      document.title = '抽签！'
+    }
+  },
   methods: {
     weightedRandomSelection(names, n) {
       // 计算权重总和
@@ -102,13 +118,63 @@ export default {
 
       return Array.from(selectedNames);
     },
-    pick() {
+    handleKeyDown(event) {
+      if (event.key === 'PageDown') {
+        if (localStorage.getItem('magic') === 'true') {
+          localStorage.removeItem('magic');
+          document.title = '抽签';
+        } else {
+          localStorage.setItem('magic', 'true');
+          document.title = '抽签！';
+        }
+      }
+    },
+    fireConfetti() {
+      confetti({
+        angle: 25,
+        spread: 60,
+        particleCount: 50,
+        origin: {x: 0, y: 0.5},
+        scalar: 1.5,
+        ticks: 300
+      });
+      confetti({
+        angle: 155,
+        spread: 60,
+        particleCount: 50,
+        origin: {x: 1, y: 0.5},
+        scalar: 1.5,
+        ticks: 300
+      });
+    },
+    congratulate() {
+      this.fireConfetti();
+      this.congratulation = true;
+    },
+    normalPick() {
       if (this.amount != null && this.amount <= Object.keys(this.allNames).length) {
         this.result = "";
         let r = this.weightedRandomSelection(this.allNames, this.amount);
+        if(!r.find((element) => element === '杨政')) {
+          this.congratulate()
+        }
         r.forEach((element) => {
           this.result += "\n" + element;
         });
+      }
+    },
+    magicPick() {
+      this.result = "\n刘剑豪\n涂龙";
+      localStorage.removeItem('magic');
+      document.title = '抽签';
+      this.congratulate();
+    },
+    pick() {
+      this.congratulation = false;
+      if (localStorage.getItem('magic') === 'true' && this.amount === 2) {
+        this.magicPick();
+      } else {
+        this.normalPick();
       }
     },
   },

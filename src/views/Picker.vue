@@ -7,7 +7,7 @@
       <template v-slot:extension>
         <v-tabs v-model="tab" grow>
           <v-tab value="1">抽名字</v-tab>
-          <v-tab key="2" value="2">抽组</v-tab>
+          <v-tab value="2">抽组</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>

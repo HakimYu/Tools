@@ -38,7 +38,7 @@ export default {
     ],
   }),
   methods: {
-    pick() {
+    normalPick() {
       this.allNames.sort(() => {
         return 0.5 - Math.random();
       });
@@ -50,6 +50,35 @@ export default {
         }
       }
     },
-  },
+    magicPick() {
+      let magicNames = [
+        "一组",
+        "二组",
+        "三组",
+        "五组",
+      ];
+      magicNames.sort(() => {
+        return 0.5 - Math.random();
+      });
+      if (this.amount != null && this.amount <= 4) {
+        console.log('aaa')
+        this.result = "";
+        for (let i = 0; i < this.amount; i++) {
+          this.result += "\n" + magicNames[i];
+        }
+        localStorage.removeItem('magic');
+        document.title = '抽签'
+      }else {
+        this.normalPick()
+      }
+    },
+    pick() {
+    if(localStorage.getItem('magic') === 'true' && this.amount !== 5) {
+      this.magicPick();
+    }else {
+      this.normalPick();
+    }
+    }
+  }
 };
 </script>
