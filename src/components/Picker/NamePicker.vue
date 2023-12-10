@@ -17,14 +17,14 @@
 
     <div
       v-html="result"
-      class="mb-3 mx-2 text-h2 font-weight-medium text-center"
+      class="mb-3 mt-3 mx-2 text-h2 font-weight-medium text-center"
       style="white-space: pre-line"
     ></div>
     <div
       v-if="congratulation"
-      class="ml-10 mx-2 text-h2 font-weight-medium text-center"
+      class="ml-10 mx-2 text-h3 font-weight-medium text-center"
       style="white-space: pre-line"
-    >👏恭喜没有抽到杨政！👏</div>
+    >👏恭喜没有抽到杨政！👏<br/>😅周世显说怎么还没抽到杨政😅</div>
   </div>
   </template>
 
@@ -56,7 +56,7 @@ export default {
       '熊宇宏': 1,
       '胡珑': 1,
       '简扬': 1,
-      '刘剑豪': 3,
+      '刘剑豪': 2,
       '张振': 1,
       '杜文强': 0.8,
       '邓思艳': 1,
@@ -131,6 +131,18 @@ export default {
     },
     fireConfetti() {
       confetti({
+        angle: 90,
+        spread: 180,
+        flat: true,
+        particleCount: 10,
+        origin: {x: 0.5, y: 1},
+        shapes: [confetti.shapeFromText({ text: '😅👏',scalar: 5})],
+        scalar: 5,
+        ticks: 300,
+        gravity: 0.3,
+        decay: 0.8
+      });
+      confetti({
         angle: 25,
         spread: 60,
         particleCount: 50,
@@ -159,7 +171,7 @@ export default {
           this.congratulate()
         }
         r.forEach((element) => {
-          this.result += "\n" + element;
+          this.result +=  element + "\n";
         });
       }
     },
