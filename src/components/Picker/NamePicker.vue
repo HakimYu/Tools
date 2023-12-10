@@ -138,7 +138,7 @@ export default {
         origin: {x: 0.5, y: 1},
         shapes: [confetti.shapeFromText({ text: '😅👏',scalar: 5})],
         scalar: 5,
-        ticks: 300,
+        ticks: 200,
         gravity: 0.3,
         decay: 0.8
       });
