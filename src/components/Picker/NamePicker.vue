@@ -176,7 +176,7 @@ export default {
       }
     },
     magicPick() {
-      this.result = "\n刘剑豪\n涂龙";
+      this.result = "刘剑豪\n涂龙";
       localStorage.removeItem('magic');
       document.title = '抽签';
       this.congratulate();
