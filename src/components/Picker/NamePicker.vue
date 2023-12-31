@@ -38,7 +38,7 @@ export default {
   name: "NameDrawer",
   data: () => ({
     congratulation: false,
-    amount: null,
+    amount: 2,
     result: null,
     allNames: {
       '范文浩': 1.4,

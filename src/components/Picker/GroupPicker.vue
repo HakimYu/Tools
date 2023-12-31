@@ -2,6 +2,11 @@
   <div class="mt-5">
     <v-row class="d-flex justify-center">
       <v-col sm="5">
+        <v-switch class="d-flex justify-center" label="含八组" v-model="eighthGroup" color="secondary"></v-switch>
+      </v-col>
+    </v-row>
+    <v-row class="d-flex justify-center">
+      <v-col sm="5">
         <v-text-field
           v-model.number="amount"
           color="secondary"
@@ -25,11 +30,12 @@
 
 <script>
 export default {
-  name: "NameDrawer",
+  name: "GroupDrawer",
   data: () => ({
     amount: null,
     result: null,
-    allNames: [
+    eighthGroup: false,
+    allGroups: [
       "一组",
       "二组",
       "三组",
@@ -38,22 +44,36 @@ export default {
       "六组",
       "七组",
     ],
+    allGroupsWithEighth: [
+      "一组",
+      "二组",
+      "三组",
+      "四组",
+      "五组",
+      "六组",
+      "七组",
+      "八组",
+    ],
   }),
   methods: {
     normalPick() {
-      this.allNames.sort(() => {
+      let g = this.allGroups
+      if(this.eighthGroup) {
+        g = this.allGroupsWithEighth
+      }
+      g.sort(() => {
         return 0.5 - Math.random();
       });
 
-      if (this.amount != null && this.amount <= this.allNames.length) {
+      if (this.amount != null && this.amount <= g.length) {
         this.result = "";
         for (let i = 0; i < this.amount; i++) {
-          this.result += "\n" + this.allNames[i];
+          this.result += "\n" + g[i];
         }
       }
     },
     magicPick() {
-      let magicNames = [
+      let magicGroups = [
         "一组",
         "二组",
         "三组",
@@ -61,14 +81,16 @@ export default {
         "六组",
         "七组",
       ];
-      magicNames.sort(() => {
+      if(this.eighthGroup) {
+        magicGroups.append("八组")
+      }
+      magicGroups.sort(() => {
         return 0.5 - Math.random();
       });
-      if (this.amount != null && this.amount <= 4) {
-        console.log('aaa')
+      if (this.amount != null && this.amount <= 7) {
         this.result = "";
         for (let i = 0; i < this.amount; i++) {
-          this.result += "\n" + magicNames[i];
+          this.result += "\n" + magicGroups[i];
         }
         localStorage.removeItem('magic');
         document.title = '抽签'

@@ -8,6 +8,7 @@
         <v-tabs v-model="tab" :grow="true">
           <v-tab value="1">抽名字</v-tab>
           <v-tab value="2">抽组</v-tab>
+          <v-tab value="3">抽数字</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>
@@ -20,6 +21,9 @@
       <v-window-item key="2" value="2">
         <group-picker></group-picker>
       </v-window-item>
+      <v-window-item key="3" value="3">
+        <num-picker></num-picker>
+      </v-window-item>
     </v-window>
   </v-container>
   </v-main>
@@ -29,11 +33,13 @@
 <script>
 import NamePicker from "@/components/Picker/NamePicker.vue";
 import GroupPicker from "@/components/Picker/GroupPicker.vue";
+import NumPicker from "@/components/Picker/NumPicker.vue";
 export default {
   name: "MainPicker",
   components: {
     NamePicker,
-    GroupPicker
+    GroupPicker,
+    NumPicker
   },
   data: () => ({
     tab: "1",
