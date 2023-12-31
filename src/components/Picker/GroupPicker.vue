@@ -35,6 +35,8 @@ export default {
       "三组",
       "四组",
       "五组",
+      "六组",
+      "七组",
     ],
   }),
   methods: {
@@ -56,6 +58,8 @@ export default {
         "二组",
         "三组",
         "五组",
+        "六组",
+        "七组",
       ];
       magicNames.sort(() => {
         return 0.5 - Math.random();

@@ -24,9 +24,10 @@
       v-if="congratulation"
       class="ml-10 mx-2 text-h3 font-weight-medium text-center"
       style="white-space: pre-line"
-    >👏恭喜没有抽到杨政！👏<br/>😅周世显说怎么还没抽到杨政😅</div>
+    >👏恭喜没有抽到杨政！👏<br/>😅周世显说怎么还没抽到杨政😅
+    </div>
   </div>
-  </template>
+</template>
 
 <script setup>
 import confetti from 'canvas-confetti';
@@ -41,7 +42,6 @@ export default {
     result: null,
     allNames: {
       '范文浩': 1.4,
-      '喻鸿杰': 0.5,
       '杨政': 0.8,
       '程欣佳': 1,
       '张权': 1,
@@ -115,7 +115,6 @@ export default {
           selectedNames.add(selectedName);
         }
       }
-
       return Array.from(selectedNames);
     },
     handleKeyDown(event) {
@@ -136,7 +135,7 @@ export default {
         flat: true,
         particleCount: 10,
         origin: {x: 0.5, y: 1},
-        shapes: [confetti.shapeFromText({ text: '😅👏',scalar: 5})],
+        shapes: [confetti.shapeFromText({text: '😅👏', scalar: 5})],
         scalar: 5,
         ticks: 200,
         gravity: 0.3,
@@ -163,15 +162,29 @@ export default {
       this.fireConfetti();
       this.congratulation = true;
     },
+    insertRandom(arr, element) {
+      // 生成随机位置
+      let randomIndex = Math.floor(Math.random() * (arr.length + 1));
+      // 在随机位置插入元素
+      arr.splice(randomIndex, 0, element);
+    },
     normalPick() {
-      if (this.amount != null && this.amount <= Object.keys(this.allNames).length) {
+      if (this.amount != null && this.amount <= 46) {
         this.result = "";
-        let r = this.weightedRandomSelection(this.allNames, this.amount);
-        if(!r.find((element) => element === '杨政')) {
+        let r = []
+        if (this.amount === 46) {
+          r = this.weightedRandomSelection(this.allNames, 45);
+        } else {
+          r = this.weightedRandomSelection(this.allNames, this.amount);
+        }
+        if (this.amount === 46) {
+          this.insertRandom(r,'喻鸿杰')
+        }
+        if (!r.find((element) => element === '杨政')) {
           this.congratulate()
         }
         r.forEach((element) => {
-          this.result +=  element + "\n";
+          this.result += element + "\n";
         });
       }
     },

@@ -5,7 +5,7 @@
       </v-app-bar-nav-icon>
       <v-app-bar-title>抽签</v-app-bar-title>
       <template v-slot:extension>
-        <v-tabs v-model="tab" grow>
+        <v-tabs v-model="tab" :grow="true">
           <v-tab value="1">抽名字</v-tab>
           <v-tab value="2">抽组</v-tab>
         </v-tabs>
@@ -30,7 +30,7 @@
 import NamePicker from "@/components/Picker/NamePicker.vue";
 import GroupPicker from "@/components/Picker/GroupPicker.vue";
 export default {
-  name: "Drawer",
+  name: "MainPicker",
   components: {
     NamePicker,
     GroupPicker
