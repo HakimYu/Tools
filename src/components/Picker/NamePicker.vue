@@ -30,6 +30,7 @@
 </template>
 
 <script setup>
+// noinspection ES6UnusedImports
 import confetti from 'canvas-confetti';
 </script>
 
@@ -56,7 +57,6 @@ export default {
       '熊宇宏': 1,
       '胡珑': 1,
       '简扬': 1,
-      '刘剑豪': 1,
       '张振': 1,
       '杜文强': 1,
       '邓思艳': 1,
@@ -169,16 +169,14 @@ export default {
       arr.splice(randomIndex, 0, element);
     },
     normalPick() {
-      if (this.amount != null && this.amount <= 46) {
+      if (this.amount != null && this.amount <= 45) {
         this.result = "";
         let r = []
-        if (this.amount === 46) {
-          r = this.weightedRandomSelection(this.allNames, 45);
+        if (this.amount === 45) {
+          r = this.weightedRandomSelection(this.allNames, 44);
+          this.insertRandom(r,'喻鸿杰')
         } else {
           r = this.weightedRandomSelection(this.allNames, this.amount);
-        }
-        if (this.amount === 46) {
-          this.insertRandom(r,'喻鸿杰')
         }
         if (!r.find((element) => element === '杨政')) {
           this.congratulate()
@@ -189,10 +187,10 @@ export default {
       }
     },
     magicPick() {
-      this.result = "刘剑豪\n涂龙";
+      this.result = "程舒\n杨政";
       localStorage.removeItem('magic');
       document.title = '抽签';
-      this.congratulate();
+      // this.congratulate();
     },
     pick() {
       this.congratulation = false;
