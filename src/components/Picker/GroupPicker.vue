@@ -2,7 +2,7 @@
   <div class="mt-5">
     <v-row class="d-flex justify-center">
       <v-col sm="5">
-        <v-switch class="d-flex justify-center" label="含八组" v-model="eighthGroup" color="secondary"></v-switch>
+        <v-switch class="d-flex justify-center" label="含C组" v-model="eighthGroup" color="secondary"></v-switch>
       </v-col>
     </v-row>
     <v-row class="d-flex justify-center">
@@ -52,7 +52,7 @@ export default {
       "五组",
       "六组",
       "七组",
-      "八组",
+      "C组",
     ],
   }),
   methods: {
